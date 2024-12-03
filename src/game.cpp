@@ -4,16 +4,18 @@
 #include <SDL2/SDL_image.h>
 
 #include "game.h"
-#include "img.h"
+#include "scene.h"
+#include "ui.h"
 
 Game::Game(std::string title, int x, int y, int w, int h, int frame_rate){
 	SDL_Init(SDL_INIT_EVERYTHING);                                                                 // init lib
 	IMG_Init(IMG_INIT_PNG);
 	win = SDL_CreateWindow(title.c_str(), x, y, w, h, 0);                                          // create the window
 	rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);                                  // create renderer
-	Img icon(rend, "assets/icon.png");                                                             // load icon.png as img
+	Img icon("assets/icon.png");                                                                   // load icon.png as img
 	icon.set_icon(win);                                                                            // set icon.png as window icon
 	fps = frame_rate;                                                                              // store max fps
+	scene = &scene1;
 	running = true;                                                                                // set main loop flag
 }
 
@@ -26,6 +28,7 @@ void Game::frame_cap(Uint32 ticks){
 void Game::main(){
 	SDL_Event event;                                                                               // declare event
 	while(running){                                                                                // while the game is running...
+		SDL_GetMouseState(&mouse_x, &mouse_y);
 		Uint32 start = SDL_GetTicks();                                                             // get current time in ticks
 		events.clear();                                                                            // reset event list
 		while(SDL_PollEvent(&event)){                                                              // while events are getting gotten...
@@ -38,6 +41,11 @@ void Game::main(){
 					break;
 			}
 		}
+		SDL_RenderClear(rend);
+
+		scene->main(scene, rend, events, mouse_x, mouse_y);
+
+		SDL_RenderPresent(rend);
 		frame_cap(start - SDL_GetTicks());                                                         // cap frame rate
 	}
 }
