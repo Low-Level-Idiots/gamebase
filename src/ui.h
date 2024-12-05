@@ -19,12 +19,12 @@ class Img {
 
 class Rect {
 	public:
-		Rect(int x, int y, int w, int h);                                      // construct a rectangle object
+		Rect(int xp, int y, int w, int h);                                      // construct a rectangle object
 		int x;
 		int y;
 		int w;
 		int h;
-		bool colliding(int x, int y, int w, int h);                            // check if this rect is colliding with another rectangle specified
+		bool point_colliding(int x, int y, int w, int h);                      // check if this rect is colliding with another rectangle specified
 };
 
 // BUTTON CLASS
@@ -32,6 +32,9 @@ class Rect {
 class Button {
 	public:
 		Button(Img img, Rect rect);                                            // construct a button object
+		Img* img;
+		Rect* rect;
+		void render(SDL_Renderer* rend);
 		bool hover(int mouse_x, int mouse_y);
 		bool clicked(int mouse_x, int mouse_y, std::vector<SDL_Event> events);
 };

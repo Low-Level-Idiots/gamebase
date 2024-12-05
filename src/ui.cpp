@@ -29,14 +29,19 @@ Rect::Rect(int x_, int y_, int w_, int h_){
 	h = h_;
 }
 
-bool Rect::colliding(int x_, int y_, int w_, int h_){                          // check if this rect is colliding with another rectangle specified
-	
+bool Rect::colliding_point(int x_, int y_){                                    // check if this rect is colliding with a point specified
 }
 
 // BUTTONS
 
-Button::Button(Img img, Rect rect){                                            // construct a button object
-	
+Button::Button(Img img_, Rect rect_){                                          // construct a button object
+	img = &img_;
+	rect = &rect_;
+}
+
+void Button::render(SDL_Renderer* rend){
+	Img temp_img = *img;
+	temp_img.render(rend,1,1,10,10);
 }
 
 bool Button::hover(int mouse_x, int mouse_y){

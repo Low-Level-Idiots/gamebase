@@ -7,14 +7,13 @@
 
 // SCENE1
 
-Scene1::Scene1(){}
+Scene1::Scene1(){
+	btn = new Button(Img("assets/missing.png"), Rect(1,1,100,100));
+}
 
 void Scene1::main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event> events, int mouse_x, int mouse_y){
 	SDL_SetRenderDrawColor(rend, 100, 100, 255, 255);
-	for(int i = 0; i < events.size(); i++){
-		switch(events[i].type){ 
-		}
-	}
+	btn->render(rend);
 }
 
 // SCENE2

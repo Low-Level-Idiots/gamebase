@@ -18,6 +18,7 @@ class Scene {
 class Scene1 : public Scene {
 	public:
 		Scene1();
+		Button* btn;
 		void main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event>, int mouse_x, int mouse_y);
 };
 
