@@ -19,12 +19,12 @@ class Img {
 
 class Rect {
 	public:
-		Rect(int xp, int y, int w, int h);                                      // construct a rectangle object
+		Rect(int x_, int y_, int w_, int h_);                                  // construct a rectangle object
 		int x;
 		int y;
 		int w;
 		int h;
-		bool point_colliding(int x, int y, int w, int h);                      // check if this rect is colliding with another rectangle specified
+		bool point_colliding(int x_, int y_);                                  // check if this rect is colliding with another rectangle specified
 };
 
 // BUTTON CLASS

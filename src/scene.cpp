@@ -8,7 +8,10 @@
 // SCENE1
 
 Scene1::Scene1(){
-	btn = new Button(Img("assets/missing.png"), Rect(1,1,100,100));
+	Img img("assets/missing.png");
+	Rect rect(1, 1, 100, 100);
+	btn = new Button(img, rect);
+	std::cout << "rect in scene1::scene1(): " << btn->rect->x << std::endl;
 }
 
 void Scene1::main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event> events, int mouse_x, int mouse_y){
