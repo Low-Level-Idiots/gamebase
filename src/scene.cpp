@@ -8,15 +8,12 @@
 // SCENE1
 
 Scene1::Scene1(){
-	Img img("assets/missing.png");
-	Rect rect(1, 1, 100, 100);
-	btn = new Button(img, rect);
-	std::cout << "rect in scene1::scene1(): " << btn->rect->x << std::endl;
+	btn.init("assets/missing.png", 1, 1, 100, 100);
 }
 
 void Scene1::main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event> events, int mouse_x, int mouse_y){
 	SDL_SetRenderDrawColor(rend, 100, 100, 255, 255);
-	btn->render(rend);
+	btn.render(rend);
 }
 
 // SCENE2

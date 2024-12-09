@@ -7,7 +7,7 @@
 
 // IMAGES
 
-Img::Img(std::string file){
+void Img::init(std::string file){
 	surf = IMG_Load(file.c_str());
 }
 
@@ -23,7 +23,7 @@ void Img::set_icon(SDL_Window* win){
 
 // RECT MATH
 
-Rect::Rect(int x_, int y_, int w_, int h_){
+void Rect::init(int x_, int y_, int w_, int h_){
 	x = x_;
 	y = y_;
 	w = w_;
@@ -36,15 +36,13 @@ bool Rect::point_colliding(int x_, int y_){                                    /
 
 // BUTTONS
 
-Button::Button(Img img_, Rect rect_){                                          // construct a button object
-	img = &img_;
-	rect = &rect_;
+void Button::init(std::string filename, int x, int y, int w, int h){                                          // construct a button object
+	img.init(filename);
+	rect.init(x,y,w,h);
 }
 
 void Button::render(SDL_Renderer* rend){
-	Rect rec = *rect;
-	img->render(rend, rec.x / 5.8765899, rec.y / 5.8765899, rect->w / 5.8765899, rect->h / 5.8765899);
-	std::cout << rec.x << std::endl;
+	img.render(rend, rect.x, rect.y, rect.w, rect.h);
 }
 
 bool Button::hover(int mouse_x, int mouse_y){

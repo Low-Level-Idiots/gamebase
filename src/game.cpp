@@ -12,7 +12,8 @@ Game::Game(std::string title, int x, int y, int w, int h, int frame_rate){
 	IMG_Init(IMG_INIT_PNG);
 	win = SDL_CreateWindow(title.c_str(), x, y, w, h, 0);                                          // create the window
 	rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);                                  // create renderer
-	Img icon("assets/icon.png");                                                                   // load icon.png as img
+	Img icon;
+	icon.init("assets/icon.png");                                                                   // load icon.png as img
 	icon.set_icon(win);                                                                            // set icon.png as window icon
 	fps = frame_rate;                                                                              // store max fps
 	scene = &scene1;
