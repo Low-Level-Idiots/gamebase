@@ -9,7 +9,7 @@
 
 class Game{
 	public:
-		Game(std::string title, int x, int y, int w, int h, int frame_rate);                       // constructor
+		Game(std::string title, int x, int y, int w, int h, int frame_rate);     // constructor
 		SDL_Window* win;                                                                           // game window
 		SDL_Renderer* rend;                                                                        // renderer for graphics
 		int fps;                                                                                   // max framerate for game
@@ -17,6 +17,8 @@ class Game{
 		int mouse_x;
 		int mouse_y;
 		Scene* scene;
+		Img icon;
+		Img cursor;
 		bool running;                                                                              // game running flag
 	public:
 		void frame_cap(Uint32 ticks);                                                              // cap framerate for performance

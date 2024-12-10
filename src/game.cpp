@@ -12,9 +12,10 @@ Game::Game(std::string title, int x, int y, int w, int h, int frame_rate){
 	IMG_Init(IMG_INIT_PNG);
 	win = SDL_CreateWindow(title.c_str(), x, y, w, h, 0);                                          // create the window
 	rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);                                  // create renderer
-	Img icon;
-	icon.init("assets/icon.png");                                                                   // load icon.png as img
+	icon.init("assets/icon.png");                                                                  // load icon.png as img
 	icon.set_icon(win);                                                                            // set icon.png as window icon
+	cursor.init("assets/cursor.png");
+	SDL_ShowCursor(false);
 	fps = frame_rate;                                                                              // store max fps
 	scene = &scene1;
 	running = true;                                                                                // set main loop flag
@@ -46,6 +47,7 @@ void Game::main(){
 
 		scene->main(scene, rend, events, mouse_x, mouse_y);
 
+		cursor.render(rend, mouse_x, mouse_y, 50, 50);
 		SDL_RenderPresent(rend);
 		frame_cap(start - SDL_GetTicks());                                                         // cap frame rate
 	}
