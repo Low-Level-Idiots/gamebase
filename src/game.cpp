@@ -12,11 +12,13 @@ Game::Game(std::string title, int x, int y, int w, int h, int frame_rate){
 	IMG_Init(IMG_INIT_PNG);
 	win = SDL_CreateWindow(title.c_str(), x, y, w, h, 0);                                          // create the window
 	rend = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED);                                  // create renderer
-	icon.init("assets/icon.png");                                                                  // load icon.png as img
+	icon.init(rend, "assets/icon.png");                                                                  // load icon.png as img
 	icon.set_icon(win);                                                                            // set icon.png as window icon
-	cursor.init("assets/cursor.png");
+	cursor.init(rend, "assets/cursor.png");
 	SDL_ShowCursor(false);
 	fps = frame_rate;                                                                              // store max fps
+	scene1.init(rend);
+	scene2.init(rend);
 	scene = &scene1;
 	running = true;                                                                                // set main loop flag
 }

@@ -10,6 +10,7 @@
 
 class Scene {
 	public:
+		virtual void init(SDL_Renderer* rend) = 0;
 		virtual void main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event>, int mouse_x, int mouse_y) = 0;
 };
 
@@ -17,8 +18,8 @@ class Scene {
 
 class Scene1 : public Scene {
 	public:
-		Scene1();
 		Button btn;
+		void init(SDL_Renderer* rend);
 		void main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event>, int mouse_x, int mouse_y);
 };
 
@@ -26,7 +27,7 @@ class Scene1 : public Scene {
 
 class Scene2 : public Scene {
 	public:
-		Scene2();
+		void init(SDL_Renderer* rend);
 		void main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event>, int mouse_x, int mouse_y);
 };
 
