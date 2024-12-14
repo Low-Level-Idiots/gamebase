@@ -8,16 +8,20 @@
 // SCENE1
 
 void Scene1::init(SDL_Renderer* rend){
-	btn.init(rend, "assets/button.png", 1, 1, 300, 100);
-
+	Rect rect;
+	rect.init(1,1,300,100);
+	btn.init(rend, "assets/button", rect);
 }
 
 void Scene1::main(Scene* scene, SDL_Renderer* rend, std::vector<SDL_Event> events, int mouse_x, int mouse_y){
 	SDL_SetRenderDrawColor(rend, 100, 100, 255, 255);
+	btn.get_state(mouse_x, mouse_y, events);
 	btn.render(rend);
-	if(btn.clicked(mouse_x, mouse_y, events)){
-		std::cout << "clicked" << std::endl;
-	}
+/*	switch(btn.state){
+		case Button::CLICKED:
+			std::cout << "clicked" << std::endl;
+			break;
+	}*/
 }
 
 // SCENE2

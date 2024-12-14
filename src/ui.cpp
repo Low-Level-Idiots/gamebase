@@ -41,35 +41,37 @@ void Img::set_icon(SDL_Window* win){
 
 // BUTTONS
 
-void Button::init(SDL_Renderer* rend, std::string filename, int x, int y, int w, int h){
-	img.init(rend, filename);                                                  // load first filename as idle button image...
-	rect.init(x, y, w, h);                                                     // make a rectangle at (x, y) with width and height
-}
-
-void Button::render(SDL_Renderer* rend){
-	img.render(rend, rect.x, rect.y, rect.w, rect.h);
-}
-
-bool Button::hover(int mouse_x, int mouse_y){
-	if(rect.point_colliding(mouse_x, mouse_y)){
-		return true;
+void Button::init(SDL_Renderer* rend, std::string basename, Rect rect_){
+	std::string suffix[3] = {"_idle.png", "_hover.png", "_clicked.png"};
+	for(int i = 0; i < 3; i++){
+		Img img;
+		sprites.push_back(img);
+		sprites[i].init(rend, suffix[i].insert(0, basename));
 	}
-	return false;
+	rect = rect_;
 }
 
-bool Button::clicked(int mouse_x, int mouse_y, std::vector<SDL_Event> events){
-	if(hover(mouse_x, mouse_y)){
+void Button::get_state(int mouse_x, int mouse_y, std::vector<SDL_Event> events){
+	if(rect.point_colliding(mouse_x, mouse_y)){
 		for(int i = 0; i < events.size(); i++){
 			switch(events[i].type){
 				case SDL_MOUSEBUTTONDOWN:
 					switch(events[i].button.button){
 						case SDL_BUTTON_LEFT:
-							return true;
+							state = CLICKED;
+							return;
 							break;
 					}
 					break;
 			}
 		}
+		state = HOVER;
+		return;
 	}
-	return false;
+	state = IDLE;
+	return;
+}
+
+void Button::render(SDL_Renderer* rend){
+	sprites[state].render(rend, rect.x, rect.y, rect.w, rect.h);
 }
